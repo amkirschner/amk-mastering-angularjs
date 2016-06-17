@@ -11,11 +11,14 @@
       // Registering the parkingCtrl to the parking module
       parking.controller("parkingCtrl", function ($scope) {
         // Binding the car’s array to the scope
-        $scope.cars = [
+       /* $scope.cars = [
           {plate: '6MBV006'}, 
           {plate: '5BBM299'}, 
           {plate: '5AOJ230'}
-        ];
+        ];*/
+        $scope.cars = [];
+
+        $scope.appTitle="[Packt] Parking";
         // Binding the park function to the scope
         $scope.park = function (car) {
           $scope.cars.push(angular.copy(car));
@@ -26,23 +29,29 @@
   </head>
   <!-- Attaching the view to the parkingCtrl -->
   <body ng-controller="parkingCtrl">
-    <h3>[Packt] Parking</h3>
+    <h3 ng-bind="appTitle"></h3>
     <table>
       <thead>
         <tr>
           <th>Plate</th>
+          <th>Entrance</th>
         </tr>
       </thead>
       <tbody>
-        <!-- Iterating over the cars -->
         <tr ng-repeat="car in cars">
+        <td><span ng-bind="car.plate"></span></td>
+        <td><span ng-bind="car.entrance"></span></td>
+        <!-- Iterating over the cars -->
+        <!-- <tr ng-repeat="car in cars"> --> 
           <!-- Showing the car’s plate -->
-          <td>{{car.plate}}</td>
+         <!-- <td>{{car.plate}}</td>-->
+
         </tr>
       </tbody>
     </table>
     <!-- Binding the car object, with plate, to the scope -->
-    <input type="text" ng-model="car.plate"/>
+    <!--<input type="text" ng-model="car.plate"/>-->
+    <input type="text" ng-model="car.plate" placeholder="What's the plate?"/>
     <!-- Binding the park function to the click event -->
     <button ng-click="park(car)">Park</button>
   </body>
